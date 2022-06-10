@@ -13,10 +13,33 @@ const mockUpStrand = () => {
   return newStrand;
 };
 
+const randomNum = () => {
+  let num = Math.floor(Math.random() * 1000);
+  return num;
+}
 
+// console.log(returnRandBase());
+// console.log(mockUpStrand());
 
+const pAequorFactory = (num, array) => {
+  return {
+    specimenNum: num,
+    dna: array,
+    mutate() {
+      const indexToBeMutated = Math.floor(Math.random() * this.dna.length);
+      let newBase = returnRandBase();
 
+      while (this.dna[indexToBeMutated] === newBase) {
+        newBase = returnRandBase();
+      }
 
+      this.dna[indexToBeMutated] = newBase;
 
+      return this.dna;
+    },
+  }
+}
 
+const newMonster = pAequorFactory(randomNum(), mockUpStrand())
+console.log(newMonster);
 
